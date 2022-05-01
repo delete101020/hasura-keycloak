@@ -1,0 +1,16 @@
+{
+  "name": "hasura-keycloak",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-console": "cd my-project && hasura console --admin-secret admin",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "hasura-cli": "^2.6.0"
+  }
+}

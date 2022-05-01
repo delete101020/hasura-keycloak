@@ -1,0 +1,26 @@
+type Mutation {
+  register(
+    username: String!
+    password: String!
+    email: String!
+    first_name: String
+    last_name: String
+  ): RegisterOutput
+}
+
+input RegisterInput {
+  username: String!
+  password: String!
+  email: String!
+  first_name: String
+  last_name: String
+}
+
+type RegisterOutput {
+  status: Int!
+  message: String
+  data: RegisterResponseData
+}
+
+scalar RegisterResponseData
+

@@ -1,0 +1,25 @@
+table:
+  schema: public
+  name: sample
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - id
+      filter: {}
+  - role: super_admin
+    permission:
+      columns:
+        - key
+        - value
+        - created_at
+        - updated_at
+        - id
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - id
+        - key
+        - value
+      filter: {}
