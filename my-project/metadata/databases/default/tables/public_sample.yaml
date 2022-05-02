@@ -5,7 +5,7 @@ select_permissions:
   - role: anonymous
     permission:
       columns:
-        - id
+        - key
       filter: {}
   - role: super_admin
     permission:

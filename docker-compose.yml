@@ -21,27 +21,24 @@ services:
       - 8080:8080
     depends_on:
       - pg_hasura
-    environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@pg_hasura:5432/hasura_db
-      HASURA_GRAPHQL_ADMIN_SECRET: admin
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256", "key": "-----BEGIN CERTIFICATE-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw8lBD5CasNlCioeZnNauGcpvTmBV9wTKA77buI5QTznxrSTdrKT1LHsEA26JtkkfaRFtO/5T5AfgzYXlh4roBeZ0Whu74Do4NgUPjqNxttmYD42ZIjjWb2TmU1iZU4MUA1Jjusk9GJqZFTxY1f/ePhSfzQMD3oAx8jc92tJ4hOjAcrq6exsVupR12r9cnjLeSr+ybg8AoOjSvOdemQ7oIPiJrz/Cr3Sda7XC5XWfFYKJK3gTr3iw/tHunhHlorqsVZWrGE/5Occavwm5uSVfmUM5ZzoevcgbrltnwCcBfLBWSe36Yqcm6NBVn8D5LoNsWMg8Nqrt2817bU00gC1JAQIDAQAB\n-----END CERTIFICATE-----"}'
+    env_file:
+      - .env
     networks:
       - hasura_network
 
-  # auth:
-  #   image: httpsomkar/keycloak-hasura-connector:latest
-  #   environment:
-  #     KEYCLOAK_CLIENT_ID: hasura-keycloak-connector
-  #     KEYCLOAK_SERVER_URL: http://keycloak:8081/auth
-  #     KEYCLOAK_REALM: master
-  #     KEYCLOAK_SECRET: as8oyYwGaiX2gdTgUEkmNFqzsSDjRiFo
-  #     ANONYMOUS_ROLE: anonymous # (optional) Use this variable to set anonymous role name for unauthorized users as shown in the documentation: https://docs.hasura.io/1.0/graphql/manual/auth/authorization/common-roles-auth-examples.html#anonymous-not-logged-in-users
-  #     USER_ID_FIELD: sub
-  #     KEYCLOAK_DEBUG: 'true'
-  #   networks:
-  #     - hasura_network
+  express_app:
+    build:
+      context: ./express-app
+    restart: always
+    ports:
+      - 3001:3001
+    depends_on:
+      - pg_hasura
+      - hasura
+    env_file:
+      - .env
+    networks:
+      - hasura_network
 
 volumes:
   hasura_data:

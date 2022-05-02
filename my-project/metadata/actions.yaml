@@ -2,7 +2,7 @@ actions:
   - name: register
     definition:
       kind: synchronous
-      handler: http://host.docker.internal:3001/auth/signup
+      handler: http://express_app:3001/auth/signup
     permissions:
       - role: anonymous
 custom_types:

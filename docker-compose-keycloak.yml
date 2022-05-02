@@ -7,9 +7,9 @@ services:
       - 8443:8443
     depends_on:
       - pg_keycloak
+    env_file:
+      - .env
     environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
       DB_VENDOR: postgres
       DB_ADDR: pg_keycloak
       DB_USER: keycloak

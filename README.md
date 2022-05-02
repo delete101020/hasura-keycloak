@@ -21,21 +21,17 @@ Change SSO Session Idle
 
 ---
 
-2.3 Reduce JWT payload size: Client Scopes > Default Client Scopes > Remove all scopes under "Assigned Default Client Scopes" and "Assigned Optional Client Scopes"
-
----
-
-2.4 Create Keycloak client (for FE): Clients > Create > Client ID: Enter `hasura`
+2.3 Create Keycloak client (for FE): Clients > Create > Client ID: Enter `hasura`
 
 - Create roles: Clients > hasura > Roles > Add role > Enter `user`. Do similar steps for `admin` role.
 
 ---
 
-2.5 Assign default user to `admin` role: Users > View all users > Click on admin user > Role Mappings > Client Roles: Select `hasura` > Select `admin` > Click "Add selected"
+2.4 Assign default user to `admin` role: Users > View all users > Click on admin user > Role Mappings > Client Roles: Select `hasura` > Select `admin` > Click "Add selected"
 
 ---
 
-2.6 Create Mapper: Clients > `hasura` > Mappers > Create:
+2.5 Create Mapper: Clients > `hasura` > Mappers > Create:
 
 - x-hasura-user-id:
 
@@ -45,6 +41,8 @@ Change SSO Session Idle
   - Token Claim Name: `https://hasura\.io/jwt/claims.x-hasura-user-id`
   - Claim JSON Type: `String`
 
+![x-hasura-user-id](/images/x-hasura-user-id.png)
+
 - default role:
 
   - Name: `x-hasura-default-role`
@@ -52,6 +50,8 @@ Change SSO Session Idle
   - Token Claim Name: `https://hasura\.io/jwt/claims.x-hasura-default-role`
   - Client value: `user`
   - Claim JSON Type: `String`
+
+![x-hasura-default-role](/images/x-hasura-default-role.png)
 
 - x-hasura-allowed-roles:
 
@@ -62,19 +62,17 @@ Change SSO Session Idle
   - Token Claim Name: `https://hasura\.io/jwt/claims.x-hasura-allowed-roles`
   - Claim JSON Type: `String`
 
+![x-hasura-allowed-roles](/images/x-hasura-allowed-roles.png)
+
 ---
 
-2.7 Claim Keycloak JWT token:
-
-`curl --request POST --url http://localhost:8081/auth/realms/master/protocol/openid-connect/token --header 'Content-Type: application/x-www-form-urlencoded' --data username=admin --data password=admin --data grant_type=password --data client_id=hasura`
-
-2.9 Create roles for `hasura`
+2.6 Create roles for `hasura`
 
 Note: These roles are matching roles in Hasura. For example, we have `admin`, `moderator`, `user` in Hasura, we will create all of them here.
 
-Clients > `hasura-keycloak-connector` > Roles > Add role
+Clients > `hasura` > Roles > Add role
 
-## 3. Start Hasura
+## 3. Start Hasura and Express app
 
 Run command `docker-compose -d --build`
 
@@ -88,7 +86,7 @@ Follow here: <https://hasura.io/docs/latest/graphql/core/migrations/migrations-s
 
 Export current migrations and metadata:
 
-`hasura migrate create "init" --from-server --database-name default`
+`hasura migrate create "init" --from-server --database-name default --admin-secret admin`
 
 `hasura metadata export --admin-secret admin`
 
@@ -98,14 +96,32 @@ Note: Must start Hasura by command `hasura console --admin-secret admin`, otherw
 
 - Create table `sample`
 
+![Sample table](/images/sample_table.png)
+
 - Check `my-project` > `migrations` > `default`, new migration is created.
 
-## 6. Add permissions for table `sample`
+## 6. Restrict access to for table `sample`
 
 By default, `admin` (Hasura admin) will have all permissions.
 
-We will add role `user` with SELECT permissions, create an user in Keycloak manually (for test only).
+- User can select fields: id / key / value
+
+![Sample user permission](/images/sample_user_permission.png)
+
+- Anonymous can select only key
+
+![Sample anonymous permission](/images/sample_anonymous_permission.png)
 
 <https://stackoverflow.com/questions/67071458/handle-different-roles-in-hasura>
 
-## 7. Create Express app for custom queries/mutations
+## 7. User flow - Postman
+
+- User sign up: Auth > Signup
+
+- User get access token: Auth > Get token
+
+- Query `sample` table with token: Auth > Query (User).
+
+- Query `sample` table without token > Query (anonymous)
+
+Note: When query with access token, must specify which role user is querying with header `X-Hasura-Role`

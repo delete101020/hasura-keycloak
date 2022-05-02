@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "27f1312e-765d-4d4a-ae60-2c0dadbea089",
+		"name": "Hasura Keycloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation register($email: String!, $username: String!, $password: String!, $first_name: String, $last_name: String) {\r\n  register(email: $email, first_name: $first_name, last_name: $last_name, password: $password, username: $username) {\r\n    data\r\n    message\r\n    status\r\n  }\r\n}\r\n",
+								"variables": "{\r\n    \"email\": \"duong.kingfisher@mailinator.com\",\r\n    \"username\": \"duong.kingfisher\",\r\n    \"password\": \"12345678\",\r\n    \"first_name\": \"Duong\",\r\n    \"last_name\": \"Kingfisher\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation register($email: String!, $username: String!, $password: String!, $first_name: String, $last_name: String) {\r\n  register(email: $email, first_name: $first_name, last_name: $last_name, password: $password, username: $username) {\r\n    data\r\n    message\r\n    status\r\n  }\r\n}\r\n",
+										"variables": "{\r\n    \"email\": \"duong.kingfisher@mailinator.com\",\r\n    \"username\": \"duong.kingfisher\",\r\n    \"password\": \"12345678\",\r\n    \"first_name\": \"Duong\",\r\n    \"last_name\": \"Kingfisher\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 May 2022 18:21:39 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Warp/3.3.14"
+								},
+								{
+									"key": "x-request-id",
+									"value": "ba41bd59-5e23-40a8-a19d-9509437ae792"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"register\": {\n            \"data\": {\n                \"email\": \"duong.kingfisher@mailinator.com\",\n                \"first_name\": \"Duong\",\n                \"username\": \"duong.kingfisher\",\n                \"updated_at\": \"2022-05-02T18:21:39.29193+00:00\",\n                \"last_name\": \"Kingfisher\",\n                \"created_at\": \"2022-05-02T18:21:39.29193+00:00\",\n                \"id\": \"3c125a70-1bef-4f93-b81c-e6ad32e667b2\"\n            },\n            \"message\": \"SUCCESS\",\n            \"status\": 200\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "duong.kingfisher",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "hasura",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/auth/realms/master/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"auth",
+								"realms",
+								"master",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "duong.kingfisher",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "hasura",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8081/auth/realms/master/protocol/openid-connect/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"auth",
+										"realms",
+										"master",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-store"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "KEYCLOAK_LOCALE=; Version=1; Comment=Expiring cookie; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/master/; HttpOnly"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/master/; HttpOnly"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 May 2022 18:22:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2415"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFQmV3SUdRQ0VIQm1rRzVGakY5cGZhZHNVSVBBWngtX0hRY1lPUmZFOG4wIn0.eyJleHAiOjE2NTE1MTkzNDQsImlhdCI6MTY1MTUxNTc0NCwianRpIjoiOGY1MjUxODgtNmU5OC00MjMyLWJlMDUtMzAyZjkzNDIwNDFhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1NmE5YjgxOC04MzYxLTRkMzItYmZiNi00YWMyZDdhMjk3ODgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJoYXN1cmEiLCJzZXNzaW9uX3N0YXRlIjoiYThmZWYzMTYtMjAyMS00YTRkLWE5ZGUtYzY2NzNmOGMxZjEyIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW1hc3RlciIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJoYXN1cmEiOnsicm9sZXMiOlsidXNlciJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYThmZWYzMTYtMjAyMS00YTRkLWE5ZGUtYzY2NzNmOGMxZjEyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6InVzZXIiLCJ4LWhhc3VyYS11c2VyLWlkIjoiNTZhOWI4MTgtODM2MS00ZDMyLWJmYjYtNGFjMmQ3YTI5Nzg4IiwieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkdW9uZy5raW5nZmlzaGVyIiwiZW1haWwiOiJkdW9uZy5raW5nZmlzaGVyQG1haWxpbmF0b3IuY29tIn0.YIae8HsTCX4HzpEvYzeXcrYwtOG1Gn88yxJX7nNpOFE1HDVaaFGc4hZXB48q5VC1U64NHQXkuYC875HQGuAbNpb7ADLPuSktvWGlLgZBkoh5exvgcvFaQmzBS7pFvn9vBXkJSFdIl7lbRbcw3BXCB6fyMN2lDXRyClyNMJMaJLA3DIGACi50rmXxnkVUVD-1G0g5DzL8WeeiJJlxmELGsAceaT1qfJB1jwPYNTV4tvUReNFb1moa8RSxlCtVXfZ2l0U83TIzGX5xA39Xs02NhnW-FaPtsnl-mH_h-d9CExZ7gEcDpcR6M33_9ykevvgodzjooosXY__NSI0glODpYg\",\n    \"expires_in\": 3600,\n    \"refresh_expires_in\": 36000,\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzMTk0ZjQxZS04NWMxLTRkNDMtOTVjYy05ZDMwMzY2MTA2ODIifQ.eyJleHAiOjE2NTE1NTE3NDQsImlhdCI6MTY1MTUxNTc0NCwianRpIjoiYmI3YzkwMmMtZTI4Ni00MDcwLTgyYzUtNGJlM2NkNWU1MmFmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MS9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiI1NmE5YjgxOC04MzYxLTRkMzItYmZiNi00YWMyZDdhMjk3ODgiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoiaGFzdXJhIiwic2Vzc2lvbl9zdGF0ZSI6ImE4ZmVmMzE2LTIwMjEtNGE0ZC1hOWRlLWM2NjczZjhjMWYxMiIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImE4ZmVmMzE2LTIwMjEtNGE0ZC1hOWRlLWM2NjczZjhjMWYxMiJ9.l2-1SgMrseMrT63CupawaP_wE5iM0dyjOi2y8rLR3Q8\",\n    \"token_type\": \"Bearer\",\n    \"not-before-policy\": 0,\n    \"session_state\": \"a8fef316-2021-4a4d-a9de-c6673f8c1f12\",\n    \"scope\": \"profile email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Query (User)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFQmV3SUdRQ0VIQm1rRzVGakY5cGZhZHNVSVBBWngtX0hRY1lPUmZFOG4wIn0.eyJleHAiOjE2NTE1MTkzNDQsImlhdCI6MTY1MTUxNTc0NCwianRpIjoiOGY1MjUxODgtNmU5OC00MjMyLWJlMDUtMzAyZjkzNDIwNDFhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1NmE5YjgxOC04MzYxLTRkMzItYmZiNi00YWMyZDdhMjk3ODgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJoYXN1cmEiLCJzZXNzaW9uX3N0YXRlIjoiYThmZWYzMTYtMjAyMS00YTRkLWE5ZGUtYzY2NzNmOGMxZjEyIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW1hc3RlciIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJoYXN1cmEiOnsicm9sZXMiOlsidXNlciJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYThmZWYzMTYtMjAyMS00YTRkLWE5ZGUtYzY2NzNmOGMxZjEyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6InVzZXIiLCJ4LWhhc3VyYS11c2VyLWlkIjoiNTZhOWI4MTgtODM2MS00ZDMyLWJmYjYtNGFjMmQ3YTI5Nzg4IiwieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkdW9uZy5raW5nZmlzaGVyIiwiZW1haWwiOiJkdW9uZy5raW5nZmlzaGVyQG1haWxpbmF0b3IuY29tIn0.YIae8HsTCX4HzpEvYzeXcrYwtOG1Gn88yxJX7nNpOFE1HDVaaFGc4hZXB48q5VC1U64NHQXkuYC875HQGuAbNpb7ADLPuSktvWGlLgZBkoh5exvgcvFaQmzBS7pFvn9vBXkJSFdIl7lbRbcw3BXCB6fyMN2lDXRyClyNMJMaJLA3DIGACi50rmXxnkVUVD-1G0g5DzL8WeeiJJlxmELGsAceaT1qfJB1jwPYNTV4tvUReNFb1moa8RSxlCtVXfZ2l0U83TIzGX5xA39Xs02NhnW-FaPtsnl-mH_h-d9CExZ7gEcDpcR6M33_9ykevvgodzjooosXY__NSI0glODpYg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MyQuery {\r\n  sample {\r\n    id\r\n    key\r\n    value\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Query (User)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFQmV3SUdRQ0VIQm1rRzVGakY5cGZhZHNVSVBBWngtX0hRY1lPUmZFOG4wIn0.eyJleHAiOjE2NTE1MTkzNDQsImlhdCI6MTY1MTUxNTc0NCwianRpIjoiOGY1MjUxODgtNmU5OC00MjMyLWJlMDUtMzAyZjkzNDIwNDFhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI1NmE5YjgxOC04MzYxLTRkMzItYmZiNi00YWMyZDdhMjk3ODgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJoYXN1cmEiLCJzZXNzaW9uX3N0YXRlIjoiYThmZWYzMTYtMjAyMS00YTRkLWE5ZGUtYzY2NzNmOGMxZjEyIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW1hc3RlciIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJoYXN1cmEiOnsicm9sZXMiOlsidXNlciJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYThmZWYzMTYtMjAyMS00YTRkLWE5ZGUtYzY2NzNmOGMxZjEyIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLWRlZmF1bHQtcm9sZSI6InVzZXIiLCJ4LWhhc3VyYS11c2VyLWlkIjoiNTZhOWI4MTgtODM2MS00ZDMyLWJmYjYtNGFjMmQ3YTI5Nzg4IiwieC1oYXN1cmEtYWxsb3dlZC1yb2xlcyI6WyJ1c2VyIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkdW9uZy5raW5nZmlzaGVyIiwiZW1haWwiOiJkdW9uZy5raW5nZmlzaGVyQG1haWxpbmF0b3IuY29tIn0.YIae8HsTCX4HzpEvYzeXcrYwtOG1Gn88yxJX7nNpOFE1HDVaaFGc4hZXB48q5VC1U64NHQXkuYC875HQGuAbNpb7ADLPuSktvWGlLgZBkoh5exvgcvFaQmzBS7pFvn9vBXkJSFdIl7lbRbcw3BXCB6fyMN2lDXRyClyNMJMaJLA3DIGACi50rmXxnkVUVD-1G0g5DzL8WeeiJJlxmELGsAceaT1qfJB1jwPYNTV4tvUReNFb1moa8RSxlCtVXfZ2l0U83TIzGX5xA39Xs02NhnW-FaPtsnl-mH_h-d9CExZ7gEcDpcR6M33_9ykevvgodzjooosXY__NSI0glODpYg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query MyQuery {\r\n  sample {\r\n    id\r\n    key\r\n    value\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 May 2022 18:24:17 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Warp/3.3.14"
+								},
+								{
+									"key": "x-request-id",
+									"value": "ea57e9f7-9802-4f6b-8aba-2e385be2ecfe"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"sample\": [\n            {\n                \"id\": \"7709ac6e-3d33-4e1e-9697-18baec804e2b\",\n                \"key\": \"secret\",\n                \"value\": \"this is a secret\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Query (anonymous )",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MyQuery {\r\n  sample {\r\n    key\r\n  }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Query (anonymous ) - failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query MyQuery {\r\n  sample {\r\n    id\r\n    key\r\n    value\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 May 2022 18:24:50 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Warp/3.3.14"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": [\n        {\n            \"extensions\": {\n                \"path\": \"$.selectionSet.sample.selectionSet.id\",\n                \"code\": \"validation-failed\"\n            },\n            \"message\": \"field \\\"id\\\" not found in type: 'sample'\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Query (anonymous )",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query MyQuery {\r\n  sample {\r\n    key\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 May 2022 18:25:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Warp/3.3.14"
+								},
+								{
+									"key": "x-request-id",
+									"value": "54fdf231-299c-49ad-a438-ffc8e8fde0a7"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"sample\": [\n            {\n                \"key\": \"secret\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
