@@ -72,6 +72,13 @@ Note: These roles are matching roles in Hasura. For example, we have `admin`, `m
 
 Clients > `hasura` > Roles > Add role
 
+2.7 Get the Public Key
+
+Realm Settings > Keys > Active. Click on the "Public Key" Button in the row with the Algorithm RS256.
+Inside the docker-compose.yml, replace the HASURA_GRAPHQL_JWT_SECRET with a line similar to the following:
+`HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256", "key": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"}'`
+Replace the ... with the Key you just copied.
+
 ## 3. Start Hasura and Express app
 
 Run command `docker-compose -d --build`
